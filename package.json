@@ -1,0 +1,19 @@
+{
+  "name": "typescript-mongoose",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "nodemon server/app.js",
+    "build": "tsc -w",
+    "postinstall": "typings install && tsc"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.11"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.1",
+    "typescript": "^1.8.9",
+    "typings": "^0.7.12"
+  }
+}
