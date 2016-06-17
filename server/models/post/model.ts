@@ -1,26 +1,36 @@
-import { Schema, Document, Model, Types } from "mongoose";
+import { Schema, Document, Model } from "mongoose";
 import { mongo } from "../../services/database";
 
-interface IPost extends Document {
+export interface IPost extends Document {
     title: string;
     create: Date;
     author: {},
     description: string;
 }
 
-interface IPostModel extends Model<IPost> {
-    byAuthor(id: string): Promise<IPost>
+export interface IPostModel extends Model<IPost> {
+    findAllByAuthor(id: string): Promise<IPost>
 }
 
 const schema = new Schema({
     title: String,
     create: {
-        type: Date, "default": Date.now
+        type: Date,
+        "default": Date.now
     },
     author: {
-        type: Schema.Types.ObjectId, ref: 'Author'
+        type: Schema.Types.ObjectId,
+        ref: 'Author'
     },
     description: String
 });
 
-export const Post = <IPostModel>mongo.model<IPost>("Post", schema);
+schema.static("findAllByAuthor", (author: string) => {
+
+    return Post
+        .find({ author: author})
+        .lean()
+        .exec();
+});
+
+export const Post: IPostModel = <IPostModel>mongo.model<IPost>("Post", schema);

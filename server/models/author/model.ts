@@ -1,13 +1,13 @@
 import { Schema, Document, Model } from "mongoose";
 import { mongo } from "../../services/database";
 
-interface IAuthor extends Document {
+export interface IAuthor extends Document {
     name: string;
     create?: Date;
     description?: string;
 }
 
-interface IAuthorModel extends Model<IAuthor> {}
+export interface IAuthorModel extends Model<IAuthor> {}
 
 const schema = new Schema({
     name: {
@@ -15,11 +15,12 @@ const schema = new Schema({
         required: true
     },
     create: {
-        type: Date, "default": Date.now
+        type: Date,
+        "default": Date.now
     },
     description: {
         type: String
     }
 });
 
-export const Author = <IAuthorModel>mongo.model<IAuthor>("Author", schema);
+export const Author: IAuthorModel = <IAuthorModel>mongo.model<IAuthor>("Author", schema);

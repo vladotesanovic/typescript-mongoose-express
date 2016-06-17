@@ -3,19 +3,24 @@ import { Author } from "../models/author/model";
 
 export class AuthorRouter {
 
-    static routes(): Router {
-        return Router()
-            .get("/author", async (request: Request, response: Response) => {
+    private router: Router = Router();
 
-                const authors = await Author.find({}).exec();
+    getRouter(): Router {
 
-                response.json(authors)
-            })
-            .post("/author", async (request: Request, response: Response) => {
+        this.router.get("/author", async(request: Request, response: Response) => {
 
-                const author = await Author.create(request.body);
+            const authors = await Author.find({}).lean().exec();
 
-                response.json(author);
-            });
+            response.json(authors)
+        });
+
+        this.router.post("/author", async(request: Request, response: Response) => {
+
+            const author = await Author.create(request.body);
+
+            response.status(200).json(author);
+        });
+
+        return this.router;
     }
 }

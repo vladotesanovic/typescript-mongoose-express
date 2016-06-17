@@ -1,5 +1,6 @@
 import * as express from "express";
 import { json, urlencoded } from "body-parser";
+import * as http from "http";
 
 import { PostRouter } from "./routes/post";
 import { AuthorRouter } from "./routes/author";
@@ -17,7 +18,17 @@ app.get("/", (request: express.Request, response: express.Response) => {
     })
 });
 
-app.use("/api", PostRouter.routes());
-app.use("/api", AuthorRouter.routes());
+app.use((err: Error & { status: number }, request: express.Request, response: express.Response, next: express.NextFunction): void => {
 
-app.listen("3000");
+    response.status(err.status || 500);
+    response.json({
+        error: "Server error"
+    })
+});
+
+app.use("/api", PostRouter.routes());
+app.use("/api", new AuthorRouter().getRouter());
+
+const server: http.Server = app.listen(3000);
+
+export { server };

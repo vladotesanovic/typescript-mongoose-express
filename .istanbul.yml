@@ -1,0 +1,6 @@
+instrumentation:
+  root: server
+  include-all-sources: true
+  vrbose: true
+reporting:
+  dir: "coverage"
