@@ -1,5 +1,6 @@
+// import * as mongoose from "mongoose";
+import { mongoose } from "../../services/database";
 import { Schema, Document, Model } from "mongoose";
-import { mongo } from "../../services/database";
 
 export interface IPost extends Document {
     title: string;
@@ -8,7 +9,7 @@ export interface IPost extends Document {
     description: string;
 }
 
-export interface IPostModel extends Model<IPost> {
+export interface IPostModel {
     findAllByAuthor(id: string): Promise<IPost>
 }
 
@@ -33,4 +34,6 @@ schema.static("findAllByAuthor", (author: string) => {
         .exec();
 });
 
-export const Post: IPostModel = <IPostModel>mongo.model<IPost>("Post", schema);
+type PostModel = Model<IPost> & IPostModel;
+
+export const Post: PostModel = <PostModel>mongoose.model<IPost>("Post", schema);

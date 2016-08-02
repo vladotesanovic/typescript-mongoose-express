@@ -1,13 +1,11 @@
+import { mongoose } from "../../services/database";
 import { Schema, Document, Model } from "mongoose";
-import { mongo } from "../../services/database";
 
 export interface IAuthor extends Document {
     name: string;
     create?: Date;
     description?: string;
 }
-
-export interface IAuthorModel extends Model<IAuthor> {}
 
 const schema = new Schema({
     name: {
@@ -23,4 +21,4 @@ const schema = new Schema({
     }
 });
 
-export const Author: IAuthorModel = <IAuthorModel>mongo.model<IAuthor>("Author", schema);
+export const Author: Model<IAuthor> = mongoose.model<IAuthor>("Author", schema);

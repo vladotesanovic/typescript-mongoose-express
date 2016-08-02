@@ -9,11 +9,12 @@ describe("Posts", () => {
 
     it("insert new post", (done: Function) => {
 
-        const author: IAuthor = new Author();
+        const author  = new Author();
         author.name = "John";
         author.description = "He is writer";
+
         author.save(async(err: Error, _res: IAuthor) => {
-            
+
             expect(_res).to.be.an("object");
             expect(_res.name).to.be.equal("John");
 

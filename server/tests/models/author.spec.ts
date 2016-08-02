@@ -1,3 +1,5 @@
+// import { AuthorModel } from "../../models/author/model";
+import { mongoose } from "../../services/database";
 process.env.NODE_ENV = "testing";
 
 import { Author, IAuthor } from "../../models/models";
@@ -9,7 +11,7 @@ describe("Models Author", () => {
 
     it("insert new author", (done: Function) => {
 
-       const author: IAuthor = new Author();
+       const author = new Author();
        author.name = "John";
        author.description = "He is writer";
        author.save((err: Error, res: IAuthor) => {
