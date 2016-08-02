@@ -1,5 +1,3 @@
-// import { AuthorModel } from "../../models/author/model";
-import { mongoose } from "../../services/database";
 process.env.NODE_ENV = "testing";
 
 import { Author, IAuthor } from "../../models/models";

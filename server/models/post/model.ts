@@ -34,6 +34,6 @@ schema.static("findAllByAuthor", (author: string) => {
         .exec();
 });
 
-type PostModel = Model<IPost> & IPostModel;
+export type PostModel = Model<IPost> & IPostModel;
 
 export const Post: PostModel = <PostModel>mongoose.model<IPost>("Post", schema);
