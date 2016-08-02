@@ -5,7 +5,7 @@ import * as http from "http";
 import { PostRouter } from "./routes/post";
 import { AuthorRouter } from "./routes/author";
 
-const app: express.Express = express();
+const app: express.Application = express();
 
 app.use(json());
 app.use(urlencoded({
