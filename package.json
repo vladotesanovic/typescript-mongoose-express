@@ -10,7 +10,7 @@
     "start": "nodemon server/app.js",
     "tsc:w": "tsc -w",
     "typings": "typings install",
-    "test": "tsc && mocha --harmony_default_parameters server/tests/ --recursive --color --growl",
+    "test": "tsc & mocha --harmony_default_parameters server/tests/ --recursive --color --growl",
     "test:coverage": "rm -rf coverage/* && tsc && node --harmony_default_parameters ./node_modules/istanbul/lib/cli.js cover _mocha --harmony_default_parameters -- server/tests/ --recursive --color --growl",
     "postinstall": "typings install && tsc && npm run test:coverage"
   },

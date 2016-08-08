@@ -1,13 +1,22 @@
 import { mongoose } from "../../services/database";
-import { Schema, Document, Model } from "mongoose";
+import { Schema, Document, Model, model } from "mongoose";
 
 export interface IAuthor extends Document {
+    age: number;
     name: string;
     create?: Date;
     description?: string;
 }
 
+export interface IAuthorModel {
+    updateAuthor(id: {}, description: string): Promise<{ nModified: number }>
+    updateByAge(ageLimit: number, text: string): Promise<{ ok: number, nModified: number, n: number }>
+}
+
 const schema = new Schema({
+    age: {
+      type: Number
+    },
     name: {
         type: String,
         required: true
@@ -21,6 +30,32 @@ const schema = new Schema({
     }
 });
 
-export type AuthorModel = Model<IAuthor>;
+schema.static("updateAuthor", (author: {}, description: string) => {
 
-export const Author: AuthorModel = mongoose.model<IAuthor>("Author", schema);
+    return Author
+        .update({
+            "_id": author
+        }, {
+            "$set": {
+                "description": description
+            }
+        })
+        .exec();
+});
+
+schema.static("updateByAge", (ageLimit: number, text: string) => {
+
+    return Author
+        .where("age")
+        .gte(ageLimit)
+        .update({
+            "$set": {
+                description: text
+            }
+        })
+        .exec();
+});
+
+export type AuthorModel = Model<IAuthor> & model<IAuthor> & IAuthorModel & IAuthor;
+
+export const Author: AuthorModel = <AuthorModel>mongoose.model<IAuthor>("Author", schema);

@@ -7,9 +7,9 @@ const expect = chai.expect;
 
 describe("Posts", () => {
 
-    it("insert new post", (done: Function) => {
+    it("should insert new post", (done: Function) => {
 
-        const author  = new Author();
+        const author = new Author();
         author.name = "John";
         author.description = "He is writer";
 
@@ -29,9 +29,11 @@ describe("Posts", () => {
             });
 
             const posts = await Post.findAllByAuthor(_res.id);
+
             expect(posts).to.be.length(2);
             done();
         });
 
     });
+
 });

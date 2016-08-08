@@ -8,10 +8,10 @@
     "mime": "registry:dt/mime#0.0.0+20160316155526",
     "mocha": "registry:dt/mocha#2.2.5+20160720003353",
     "mongodb": "registry:dt/mongodb#2.1.0+20160602142941",
-    "mongoose": "registry:dt/mongoose#4.5.4+20160721201159",
+    "mongoose": "registry:dt/mongoose#4.5.4+20160807120805",
     "mongoose-promise": "registry:dt/mongoose-promise#4.5.4+20160720003345",
     "mpromise": "registry:dt/mpromise#0.5.4+20160316155526",
-    "node": "registry:dt/node#6.0.0+20160801161248",
+    "node": "registry:dt/node#6.0.0+20160805072842",
     "serve-static": "registry:dt/serve-static#0.0.0+20160606155157"
   }
 }

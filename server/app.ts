@@ -29,6 +29,6 @@ app.use((err: Error & { status: number }, request: express.Request, response: ex
 app.use("/api", PostRouter.routes());
 app.use("/api", new AuthorRouter().getRouter());
 
-const server: http.Server = app.listen(3000);
+const server: http.Server = app.listen(3003);
 
 export { server };
