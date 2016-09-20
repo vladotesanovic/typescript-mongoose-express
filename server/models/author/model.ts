@@ -56,6 +56,6 @@ schema.static("updateByAge", (ageLimit: number, text: string) => {
         .exec();
 });
 
-export type AuthorModel = Model<IAuthor> & model<IAuthor> & IAuthorModel & IAuthor;
+export type AuthorModel = Model<IAuthor> & IAuthorModel & IAuthor;
 
 export const Author: AuthorModel = <AuthorModel>mongoose.model<IAuthor>("Author", schema);

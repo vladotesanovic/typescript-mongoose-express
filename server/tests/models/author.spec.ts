@@ -36,7 +36,7 @@ describe("Models Author", () => {
 
     it("should update by age", async(done: Function) => {
         const results: { nModified: number} = await Author.updateByAge(21, "Good one :)");
-        const author: IAuthor = await Author.findById(authorObject._id).exec();
+        const author: IAuthor = <IAuthor>await Author.findById(authorObject._id).exec();
 
         expect(author.description).to.be.equal("Good one :)");
         expect(results.nModified).to.be.equal(1);
