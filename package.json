@@ -14,7 +14,7 @@
     "postinstall": "tsc && npm run test:coverage"
   },
   "engines": {
-    "node": ">= 5.4.1 < 6"
+    "node": ">= 5.4.1"
   },
   "dependencies": {
     "@types/body-parser": "0.0.33",
@@ -34,7 +34,6 @@
     "mocha": "^2.5.3",
     "mockgoose": "^6.0.8",
     "nodemon": "^1.10.0",
-    "typescript": "^2.0.2",
-    "typings": "^1.3.2"
+    "typescript": "^2.0.2"
   }
 }

@@ -1,5 +1,5 @@
 import { mongoose } from "../../services/database";
-import { Schema, Document, Model, model } from "mongoose";
+import { Schema, Model, Document } from "mongoose";
 
 export interface IAuthor extends Document {
     age: number;

@@ -28,7 +28,7 @@ describe("Posts", () => {
                 description: "Lorem ipsum..."
             });
 
-            const posts = await Post.findAllByAuthor(_res.id);
+            const posts = await Post.findAllByAuthor(_res._id.toString());
 
             expect(posts).to.be.length(2);
             done();
