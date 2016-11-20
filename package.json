@@ -2,12 +2,13 @@
   "name": "typescript-mongoose",
   "version": "0.0.1",
   "license": "MIT",
+  "author": "Vlado Tešanović",
   "repository": {
     "url": "https://github.com/vladotesanovic/typescript-mongoose-express.git",
     "type": "git"
   },
   "scripts": {
-    "start": "nodemon server/app.js",
+    "start": "concurrently 'npm run tsc:w' 'nodemon server/app.js'",
     "tsc:w": "tsc -w",
     "test": "tsc & mocha --harmony_default_parameters server/tests/ --recursive --color --growl",
     "test:coverage": "rm -rf coverage/* && tsc && node --harmony_default_parameters ./node_modules/istanbul/lib/cli.js cover _mocha --harmony_default_parameters -- server/tests/ --recursive --color --growl",
@@ -17,23 +18,26 @@
     "node": ">= 5.4.1"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.1",
+    "swagger-jsdoc": "^1.8.2",
+    "mockgoose": "^6.0.8"
+  },
+  "devDependencies": {
     "@types/body-parser": "0.0.33",
     "@types/chai": "^3.4.33",
     "@types/chai-http": "0.0.29",
     "@types/express": "^4.0.33",
     "@types/mocha": "^2.2.32",
     "@types/mongoose": "^4.5.34",
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
-    "mongoose": "^4.6.1"
-  },
-  "devDependencies": {
+    "@types/swagger-jsdoc": "0.0.1",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "istanbul": "^0.4.3",
     "mocha": "^2.5.3",
-    "mockgoose": "^6.0.8",
+    "concurrently": "^3.1.0",
     "nodemon": "^1.10.0",
-    "typescript": "^2.0.2"
+    "typescript": "^2.1.1"
   }
 }

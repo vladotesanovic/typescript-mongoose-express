@@ -2,8 +2,11 @@ import * as express from "express";
 import { json, urlencoded } from "body-parser";
 import * as http from "http";
 
-import { PostRouter } from "./routes/post";
-import { AuthorRouter } from "./routes/author";
+process.env.NODE_ENV = "testing";
+
+import { PostRouter } from "./routes/post/post";
+import { AuthorRouter } from "./routes/author/author";
+import { APIDocsRouter } from "./routes/swagger";
 
 const app: express.Application = express();
 
@@ -28,6 +31,7 @@ app.use((err: Error & { status: number }, request: express.Request, response: ex
 
 app.use("/api", PostRouter.routes());
 app.use("/api", new AuthorRouter().getRouter());
+app.use("/api/docs", new APIDocsRouter().getRouter());
 
 const server: http.Server = app.listen(3003);
 

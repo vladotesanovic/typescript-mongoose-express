@@ -1,4 +1,4 @@
-import { mongoose } from "../../services/database";
+import { mongoose } from "../../config/database";
 import { Schema, Model, Document } from "mongoose";
 
 export interface IAuthor extends Document {

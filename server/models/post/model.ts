@@ -1,5 +1,5 @@
 // import * as mongoose from "mongoose";
-import { mongoose } from "../../services/database";
+import { mongoose } from "../../config/database";
 import { Schema, Document, Model } from "mongoose";
 
 export interface IPost extends Document {
