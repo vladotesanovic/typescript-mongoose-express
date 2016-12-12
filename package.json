@@ -8,9 +8,9 @@
     "type": "git"
   },
   "scripts": {
-    "start": "concurrently 'npm run tsc:w' 'nodemon server/app.js'",
+    "start": "concurrently \"npm run tsc:w\" \"nodemon server/app.js\"",
     "tsc:w": "tsc -w",
-    "test": "tsc & mocha --harmony_default_parameters server/tests/ --recursive --color --growl",
+    "test": "tsc & mocha server/tests/ --recursive --color --growl",
     "test:coverage": "rm -rf coverage/* && tsc && node --harmony_default_parameters ./node_modules/istanbul/lib/cli.js cover _mocha --harmony_default_parameters -- server/tests/ --recursive --color --growl",
     "postinstall": "tsc && npm run test:coverage"
   },
