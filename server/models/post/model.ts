@@ -9,7 +9,7 @@ export interface IPost extends Document {
     description: string;
 }
 
-export interface IPostModel {
+export interface IPostModel extends Model<IPost> {
     findAllByAuthor(id: string): Promise<IPost>
 }
 
@@ -34,6 +34,4 @@ schema.static("findAllByAuthor", (author: string) => {
         .exec();
 });
 
-export type PostModel = Model<IPost> & IPostModel;
-
-export const Post: PostModel = <PostModel>mongoose.model<IPost>("Post", schema);
+export const Post = mongoose.model<IPost>("Post", schema) as IPostModel;

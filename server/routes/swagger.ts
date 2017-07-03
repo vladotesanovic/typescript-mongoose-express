@@ -1,68 +1,67 @@
-import { Router, Response } from "express";
-import swaggerJSDoc = require('swagger-jsdoc');
+import { Response, Router } from "express";
 import { readdirSync, statSync } from "fs";
-import { resolve, join } from "path";
+import { join, resolve } from "path";
+import swaggerJSDoc = require("swagger-jsdoc");
 
 export class APIDocsRouter {
 
-    private router: Router = Router();
+  private static getAllRoutes(dir: string, filelist: string[]): string[] {
 
-    getRouter(): Router {
+    const files = readdirSync(dir);
+    filelist = filelist || [];
 
-        /**
-         * Generate API documentation from JSDOCS comments.
-         *
-         * Comments specifications.
-         *
-         * @link https://github.com/OAI/OpenAPI-Specification/tree/master/examples/v2.0/yaml
-         */
-        this.router.get("/", (_: {}, response: Response) => {
+    files
+      .map((file) => {
 
-            let urls: string[] = [];
+        // filter out .map and hidden files
+        if (file.search(".map") < 0 && file.search(/^\./) < 0) {
 
-            APIDocsRouter.getAllRoutes(resolve(__dirname), urls);
+          if (statSync(join(dir, file)).isDirectory()) {
+            filelist = APIDocsRouter.getAllRoutes(join(dir, file), filelist);
+          } else {
 
-            const options: {} = {
-                apis: urls,
-                swaggerDefinition: {
-                    info: {
-                        description: "API documentation.",
-                        title: "API",
-                        version: "1.0.0"
-                    },
-                }
-            };
+            if (file.search(".ts") > 0) {
+              filelist.push(join(dir, file));
+            }
+          }
+        }
+      });
 
-            response.setHeader("Content-Type", "application/json");
-            response.send(swaggerJSDoc(options));
-        });
+    return filelist;
+  }
 
-        return this.router;
-    }
+  private router: Router = Router();
 
-    private static getAllRoutes(dir: string, filelist: Array<string>): Array<string> {
+  public getRouter(): Router {
 
-        const _files = readdirSync(dir);
-        filelist = filelist || [];
+    /**
+     * Generate API documentation from JSDOCS comments.
+     *
+     * Comments specifications.
+     *
+     * @link https://github.com/OAI/OpenAPI-Specification/tree/master/examples/v2.0/yaml
+     */
+    this.router.get("/", (_: {}, response: Response) => {
 
-        _files
-            .map(function(file) {
+      const urls: string[] = [];
 
-                // filter out .map and hidden files
-                if (file.search(".map") < 0 && file.search(/^\./) < 0) {
+      APIDocsRouter.getAllRoutes(resolve(__dirname), urls);
 
-                    if (statSync(join(dir, file)).isDirectory()) {
-                        filelist = APIDocsRouter.getAllRoutes(join(dir, file), filelist);
-                    }
-                    else {
+      const options: {} = {
+        apis: urls,
+        swaggerDefinition: {
+          info: {
+            description: "API documentation.",
+            title: "API",
+            version: "1.0.0",
+          },
+        },
+      };
 
-                        if (file.search(".ts") > 0) {
-                            filelist.push(join(dir, file));
-                        }
-                    }
-                }
-            });
+      response.setHeader("Content-Type", "application/json");
+      response.send(swaggerJSDoc(options));
+    });
 
-        return filelist;
-    }
+    return this.router;
+  }
 }

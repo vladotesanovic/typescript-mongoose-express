@@ -8,7 +8,7 @@ export interface IAuthor extends Document {
     description?: string;
 }
 
-export interface IAuthorModel {
+export interface IAuthorModel extends Model<IAuthor> {
     updateAuthor(id: {}, description: string): Promise<{ nModified: number }>
     updateByAge(ageLimit: number, text: string): Promise<{ ok: number, nModified: number, n: number }>
 }
@@ -56,6 +56,4 @@ schema.static("updateByAge", (ageLimit: number, text: string) => {
         .exec();
 });
 
-export type AuthorModel = Model<IAuthor> & IAuthorModel & IAuthor;
-
-export const Author: AuthorModel = <AuthorModel>mongoose.model<IAuthor>("Author", schema);
+export const Author = mongoose.model<IAuthor>("Author", schema) as IAuthorModel;

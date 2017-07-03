@@ -27,19 +27,17 @@ describe("Models Author", () => {
 
     });
 
-    it("should update user", async(done: Function) => {
+    it("should update user", async() => {
         const results: { nModified: number} = await Author.updateAuthor(authorObject._id, "He is not writer");
 
-        expect(results.nModified).to.be.equal(1);
-        done();
+        expect(+results.nModified).to.be.equal(1);
     });
 
-    it("should update by age", async(done: Function) => {
+    it("should update by age", async() => {
         const results: { nModified: number} = await Author.updateByAge(21, "Good one :)");
-        const author: IAuthor = <IAuthor>await Author.findById(authorObject._id).exec();
+        const author: IAuthor = <IAuthor>await Author.findById(authorObject._id).lean().exec();
 
         expect(author.description).to.be.equal("Good one :)");
-        expect(results.nModified).to.be.equal(1);
-        done();
+        expect(+results.nModified).to.be.equal(1);
     });
 });

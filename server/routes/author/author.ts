@@ -27,8 +27,8 @@ export class AuthorRouter {
          */
         this.router.get("/author", async(request: Request, response: Response) => {
 
-            const authors = await Author.find({}).lean().exec();
-
+            const authors = await Author.find({}).exec();
+            
             response.json(authors)
         });
 
