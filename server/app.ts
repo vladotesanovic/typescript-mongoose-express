@@ -1,8 +1,7 @@
 import * as express from "express";
 import { json, urlencoded } from "body-parser";
 import * as http from "http";
-
-process.env.NODE_ENV = "testing";
+import * as path from "path";
 
 import { PostRouter } from "./routes/post/post";
 import { AuthorRouter } from "./routes/author/author";
@@ -31,7 +30,8 @@ app.use((err: Error & { status: number }, request: express.Request, response: ex
 
 app.use("/api", PostRouter.routes());
 app.use("/api", new AuthorRouter().getRouter());
-app.use("/api/docs", new APIDocsRouter().getRouter());
+app.use("/api/swagger", new APIDocsRouter().getRouter());
+app.use("/docs", express.static(path.join(__dirname, './assets/swagger')));
 
 const server: http.Server = app.listen(3003);
 

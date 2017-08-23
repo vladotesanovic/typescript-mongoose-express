@@ -9,10 +9,11 @@
   },
   "scripts": {
     "start": "concurrently \"npm run tsc:w\" \"nodemon server/app.js\"",
-    "tsc:w": "tsc -w",
+    "tsc:w": "tsc -w -p ./dev.tsconfig.json",
     "lint": "tslint server/**/*.ts --fix",
-    "test": "tsc & mocha server/tests/ --recursive --color --growl",
-    "test:coverage": "rm -rf coverage/* && tsc && node --harmony_default_parameters ./node_modules/istanbul/lib/cli.js cover _mocha --harmony_default_parameters -- server/tests/ --recursive --color --growl"
+    "test": "cross-env NODE_ENV=testing && tsc -p ./dev.tsconfig.json && mocha server/tests/ --recursive --color --growl",
+    "build": "tsc -p ./prod.tsconfig.json && ncp './server/assets' './dist/assets'",
+    "test:coverage": "cross-env NODE_ENV=testing && rm -rf coverage/* && tsc -p ./dev.tsconfig.json && node --harmony_default_parameters ./node_modules/istanbul/lib/cli.js cover _mocha --harmony_default_parameters -- server/tests/ --recursive --color --growl"
   },
   "engines": {
     "node": ">= 5.4.1"
@@ -34,12 +35,14 @@
     "@types/mongoose": "^4.7.18",
     "@types/swagger-jsdoc": "0.0.1",
     "chai": "^3.5.0",
+    "ncp": "^2.0.0",
+    "cross-env": "^5.0.5",
     "chai-http": "^3.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
     "concurrently": "^3.5.0",
     "nodemon": "^1.11.0",
-    "typescript": "^2.4.1",
+    "typescript": "^2.5.1",
     "tslint": "^5.4.3"
   }
 }

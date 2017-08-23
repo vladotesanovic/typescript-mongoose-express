@@ -5,3 +5,4 @@ typings
 .idea
 /npm-debug.log
 coverage
+dist
