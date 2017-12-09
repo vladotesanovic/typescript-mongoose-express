@@ -16,14 +16,15 @@
     "test:coverage": "cross-env NODE_ENV=testing && rm -rf coverage/* && tsc -p ./dev.tsconfig.json && node --harmony_default_parameters ./node_modules/istanbul/lib/cli.js cover _mocha --harmony_default_parameters -- server/tests/ --recursive --color --growl"
   },
   "engines": {
-    "node": ">= 5.4.1"
+    "node": "8.9.1",
+    "npm": "5.2.0"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "mongoose": "^4.11.1",
     "swagger-jsdoc": "^1.9.5",
-    "mockgoose": "~6.0.8"
+    "mockgoose-fix": "~6.0.8"
   },
   "devDependencies": {
     "@types/body-parser": "1.16.4",
