@@ -33,6 +33,6 @@ app.use("/api", new AuthorRouter().getRouter());
 app.use("/api/swagger", new APIDocsRouter().getRouter());
 app.use("/docs", express.static(path.join(__dirname, './assets/swagger')));
 
-const server: http.Server = app.listen(3003);
+const server: http.Server = app.listen(process.env.PORT || 3000);
 
 export { server };

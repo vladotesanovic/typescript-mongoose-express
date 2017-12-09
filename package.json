@@ -1,30 +1,30 @@
 {
   "name": "typescript-mongoose",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "license": "MIT",
   "author": "Vlado Tešanović",
+  "engines": {
+    "node": "8.9.1",
+    "npm": "5.2.0"
+  },
   "repository": {
     "url": "https://github.com/vladotesanovic/typescript-mongoose-express.git",
     "type": "git"
   },
   "scripts": {
-    "start": "concurrently \"npm run tsc:w\" \"nodemon server/app.js\"",
-    "tsc:w": "tsc -w -p ./dev.tsconfig.json",
+    "start": "nodemon",
+    "tsc:w": "tsc -w",
     "lint": "tslint server/**/*.ts --fix",
-    "test": "cross-env NODE_ENV=testing && tsc -p ./dev.tsconfig.json && mocha server/tests/ --recursive --color --growl",
+    "test": "cross-env NODE_ENV=testing && tsc && mocha dist/tests/ --recursive --color --growl --timeout 120000",
     "build": "tsc -p ./prod.tsconfig.json && ncp './server/assets' './dist/assets'",
-    "test:coverage": "cross-env NODE_ENV=testing && rm -rf coverage/* && tsc -p ./dev.tsconfig.json && node --harmony_default_parameters ./node_modules/istanbul/lib/cli.js cover _mocha --harmony_default_parameters -- server/tests/ --recursive --color --growl"
-  },
-  "engines": {
-    "node": "8.9.1",
-    "npm": "5.2.0"
+    "test:coverage": "cross-env NODE_ENV=testing && rm -rf coverage/* && tsc && node --harmony_default_parameters ./node_modules/istanbul/lib/cli.js cover _mocha --harmony_default_parameters -- dist/tests/ --recursive --color --growl --timeout 120000"
   },
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "express": "^4.15.3",
-    "mongoose": "^4.11.1",
-    "swagger-jsdoc": "^1.9.5",
-    "mockgoose-fix": "~6.0.8"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.6",
+    "swagger-jsdoc": "^1.9.7",
+    "mockgoose-fix": "~7.3.6"
   },
   "devDependencies": {
     "@types/body-parser": "1.16.4",
@@ -35,15 +35,16 @@
     "@types/mocha": "^2.2.41",
     "@types/mongoose": "^4.7.18",
     "@types/swagger-jsdoc": "0.0.1",
-    "chai": "^3.5.0",
+    "chai": "^4.1.2",
     "ncp": "^2.0.0",
-    "cross-env": "^5.0.5",
+    "cross-env": "^5.1.1",
     "chai-http": "^3.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
     "concurrently": "^3.5.0",
     "nodemon": "^1.11.0",
-    "typescript": "^2.5.1",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.6.2",
     "tslint": "^5.4.3"
   }
 }

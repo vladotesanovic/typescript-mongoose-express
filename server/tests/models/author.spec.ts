@@ -5,26 +5,22 @@ import * as chai from "chai";
 
 const expect = chai.expect;
 
-describe("Models Author", () => {
+describe("Models Author",  () => {
 
     let authorObject: IAuthor;
 
-    it("should insert new author", (done: Function) => {
+    it("should insert new author", async () => {
 
         const author = new Author();
         author.name = "John";
         author.age = 30;
         author.description = "He is writer";
 
-        author.save((err: Error, res: IAuthor) => {
+        const res = await author.save();
+        authorObject = res;
 
-           authorObject = res;
-
-           expect(res).to.be.an("object");
-           expect(res.name).to.be.equal("John");
-           done();
-        });
-
+        expect(res).to.be.an("object");
+        expect(res.name).to.be.equal("John");
     });
 
     it("should update user", async() => {
