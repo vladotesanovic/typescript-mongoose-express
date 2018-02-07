@@ -4,7 +4,7 @@ Repository intended for producing API
  
 Implementation of async - await methods in mongoose and express.
 
-- Code coverage with Istanbul
+- Code coverage with Istanbul NYC
 - No need for MongoDB in develop mode.
 - Unit tests with Mockgoose
 - API documentation using Swagger

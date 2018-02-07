@@ -1,0 +1,8 @@
+--require ts-node/register
+--require source-map-support/register
+--recursive
+--colors
+--timeout 120000
+--full-trace
+--exit
+./server/tests/setup.ts ./server/tests/**/*.spec.ts

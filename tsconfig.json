@@ -5,6 +5,7 @@
     "outDir": "./dist",
     "mapRoot": "./dist",
     "sourceRoot": "./server",
-    "sourceMap": true
+    "sourceMap": true,
+    "removeComments": true
   }
 }

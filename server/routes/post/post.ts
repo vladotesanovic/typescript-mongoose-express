@@ -1,27 +1,28 @@
-import { Router, Request, Response } from "express";
+import { Request, Response, Router } from "express";
 import { Post } from "../../models/post/model";
 import { Author } from "../../models/author/model";
 
 export class PostRouter {
 
-    static routes(): Router {
-        return Router()
-            .get("/post", async (request: Request, response: Response) => {
+  static routes(): Router {
 
-                const posts = await Post.find({}).populate("author").exec();
+    return Router()
+      .get("/post", async (request: Request, response: Response) => {
 
-                response.json(posts)
-            })
-            .post("/post", async (request: Request, response: Response) => {
+        const posts = await Post.find({}).populate("author").exec();
 
-                let data = request.body;
-                let author = await Author.findOne().exec();
+        response.json(posts)
+      })
+      .post("/post", async (request: Request, response: Response) => {
 
-                data.author = author._id;
+        let data = request.body;
+        let author = await Author.findOne().exec();
 
-                const post = await Post.create(data);
+        data.author = author._id;
 
-                response.json(post)
-            });
-    }
+        const post = await Post.create(data);
+
+        response.json(post)
+      });
+  }
 }
