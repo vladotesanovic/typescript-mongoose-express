@@ -27,7 +27,7 @@ Swagger UI is based on 3.1.5 release.
 
 <table style="border: 0">
   <tr>
-    <td><img width="200" src="http://www.innovic.io/favicon.png" /></td>
+    <td><img width="200" src="http://www.innovic.io/assets/logo-small.png" /></td>
     <td>
       <ul>
         <li>INNOVIC doo</li>
