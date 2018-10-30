@@ -45,7 +45,7 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "debug": "^3.1.0",
-    "express": "^4.16.2",
+    "express": "^4.16.4",
     "mockgoose-fix": "~7.3.6",
     "mongoose": "^4.13.6",
     "swagger-jsdoc": "^1.9.7"
@@ -68,8 +68,8 @@
     "ncp": "^2.0.0",
     "nodemon": "^1.14.11",
     "nyc": "^11.4.1",
-    "ts-node": "^4.1.0",
-    "tslint": "^5.4.3",
-    "typescript": "^2.7.1"
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.4"
   }
 }
