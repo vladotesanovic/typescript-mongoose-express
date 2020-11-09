@@ -26,7 +26,7 @@ const schema = new Schema({
   description: String
 });
 
-schema.static("findAllByAuthor", (author: string) => {
+schema.static("findAllByAuthor", (author: {}) => {
 
   return Post
     .find({ author: author })
